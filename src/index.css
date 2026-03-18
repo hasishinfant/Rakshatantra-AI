@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neon-blue: #00e5ff;
+  --color-neon-green: #00ff9d;
+  --color-neon-yellow: #ffb300;
+  --color-neon-red: #ff3366;
+  --color-bg-void: #020810;
+  --color-bg-deep: #060d1a;
+  --color-bg-panel: #080f1f;
+  --color-bg-card: #0b1526;
+  --color-bg-elevated: #0f1c30;
+}
+
+:root {
+  --bg-void: #020810;
+  --bg-deep: #060d1a;
+  --bg-panel: #080f1f;
+  --bg-card: #0b1526;
+  --bg-elevated: #0f1c30;
+  --cyan: #00e5ff;
+  --cyan-dim: rgba(0,229,255,0.12);
+  --cyan-mid: rgba(0,229,255,0.35);
+  --green: #00ff9d;
+  --green-dim: rgba(0,255,157,0.12);
+  --amber: #ffb300;
+  --amber-dim: rgba(255,179,0,0.12);
+  --red: #ff3366;
+  --red-dim: rgba(255,51,102,0.12);
+  --purple: #7c3aed;
+  --text-primary: #e8f4fd;
+  --text-secondary: #7aa3c4;
+  --text-muted: #3d6080;
+  --border: rgba(0,229,255,0.1);
+  --border-bright: rgba(0,229,255,0.3);
+  --font-hud: 'Orbitron', monospace;
+  --font-body: 'Exo 2', sans-serif;
+}
+
+@layer base {
+  body {
+    background: var(--bg-void);
+    color: var(--text-primary);
+    font-family: 'Exo 2', sans-serif;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 4px);
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px), linear-gradient(90deg,rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+.glass-panel {
+  background: rgba(11, 21, 38, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 229, 255, 0.1);
+}
+
+.neon-glow-blue {
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+}
+
+.perspective-1000 { perspective: 1000px; }
+.preserve-3d { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; }
+
+.scanning-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.6), transparent);
+  animation: scanDown 3s linear infinite;
+  z-index: 10;
+}
+
+@keyframes scanDown {
+  0% { top: 0%; opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Custom Utilities for HUD HUD aesthetics */
+.hud-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--cyan);
+  border-style: solid;
+  opacity: 0.5;
+}
+.hud-tl { top: 4px; left: 4px; border-width: 2px 0 0 2px; }
+.hud-tr { top: 4px; right: 4px; border-width: 2px 2px 0 0; }
+.hud-bl { bottom: 4px; left: 4px; border-width: 0 0 2px 2px; }
+.hud-br { bottom: 4px; right: 4px; border-width: 0 2px 2px 0; }
